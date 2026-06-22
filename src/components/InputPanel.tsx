@@ -63,6 +63,15 @@ export default function InputPanel({ store }: { store: ElectionStore }) {
 
       {/* 후보별 입력 테이블 */}
       <table style={styles.table}>
+        <colgroup>
+          <col style={{ width: '8%' }} />
+          <col style={{ width: '13%' }} />
+          <col style={{ width: '27%' }} />
+          <col style={{ width: '15%' }} />
+          <col style={{ width: '9%' }} />
+          <col style={{ width: '11%' }} />
+          <col style={{ width: '17%' }} />
+        </colgroup>
         <thead>
           <tr>
             <th style={styles.th}>기호</th>
@@ -184,6 +193,7 @@ const styles: Record<string, CSSProperties> = {
   },
   table: {
     width: '100%',
+    tableLayout: 'fixed',
     borderCollapse: 'collapse',
     fontSize: 14,
   },
@@ -191,9 +201,12 @@ const styles: Record<string, CSSProperties> = {
     textAlign: 'left',
     padding: '4px 10px',
     fontWeight: 700,
+    overflow: 'hidden',
   },
   td: {
     padding: '6px 10px',
+    overflow: 'hidden',
+    wordBreak: 'break-word',
   },
   invalidRow: {
     display: 'flex',

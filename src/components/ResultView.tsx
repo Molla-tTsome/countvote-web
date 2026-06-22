@@ -80,25 +80,6 @@ export default function ResultView({
   const applauseRef = useRef<HTMLAudioElement>(null)
   const drumRollLoop = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  // 브라우저는 오디오 자동재생을 막기 위해 "사용자 제스처"를 요구한다. 결과 공개를
-  // 누른 뒤 몇 초 지나 타이머로 재생을 시도하면 그 시점엔 제스처가 인정되지 않을 수
-  // 있으므로, 사용자가 페이지를 처음 클릭하는 순간 오디오를 한 번 재생→정지해 미리
-  // "잠금 해제"해 둔다.
-  useEffect(() => {
-    const unlock = () => {
-      ;[drumRollRef, tadaRef, applauseRef].forEach((ref) => {
-        const el = ref.current
-        if (!el) return
-        el.play()
-          .then(() => el.pause())
-          .catch(() => {})
-      })
-      window.removeEventListener('pointerdown', unlock)
-    }
-    window.addEventListener('pointerdown', unlock)
-    return () => window.removeEventListener('pointerdown', unlock)
-  }, [])
-
   useEffect(() => {
     if (revealStage === 1) {
       const drumRoll = drumRollRef.current
